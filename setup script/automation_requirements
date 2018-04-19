@@ -1,0 +1,28 @@
+java requirements:
+sudo yum install java-1.8.0
+sudo yum remove java-1.7.0-openjdk
+
+zookeeper_for_zookeeper.txt
+server.1 = 172.31.19.211:2888:3888
+server.2 = 172.31.27.4:2888:3888
+server.3 = 172.31.30.91:2888:3888
+
+zookeeper_for_storm.txt
+172.31.19.211
+172.31.27.4
+172.31.30.91
+
+For zookeeper
+./zookeepersetup id zookeeper_for_zookeeper.txt
+
+For storm
+./stormsetup zookeeper_for_storm.txt 172.31.29.176 5
+
+172.31.29.176 -nimbus
+5 is the number of the workers
+
+free the port
+# fuser 80/tcp
+
+
+
