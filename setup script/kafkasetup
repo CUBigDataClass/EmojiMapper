@@ -1,0 +1,13 @@
+#!/bin/bash
+wget http://mirror.cogentco.com/pub/apache/kafka/1.1.0/kafka_2.12-1.1.0.tgz
+tar -xvf kafka_2.12-1.1.0.tgz
+mkdir tmp/kafka/logs -p
+rm kafka_2.12-1.1.0.tgz
+cd kafka_2.12-1.1.0/config
+sed -i.bak s/broker.id=0/broker.id=$1/g server.properties
+sed -i 's/log.dirs=\/tmp\/kafka-logs/logs.dir=..\/tmp\/kafka\/logs/g' server.properties
+while IFS='' read -r line || [[ -n "$line" ]]; do
+	sed -i 's/zookeeper.connect=localhost:2181/zookeeper.connect=$line/g' server.properties 
+done < "../../$2"
+ 
+

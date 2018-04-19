@@ -1,0 +1,12 @@
+#!/bin/bash
+wget http://www.trieuvan.com/apache/zookeeper/zookeeper-3.4.11/zookeeper-3.4.11.tar.gz
+tar -xvf zookeeper-3.4.11.tar.gz
+mkdir tmp/zookeeper/logs -p
+echo "$1" >> tmp/zookeeper/logs/myid
+cp zookeeper-3.4.11/conf/zoo_sample.cfg zookeeper-3.4.11/conf/zoo.cfg
+sed -i 's/dataDir=\/tmp\/zookeeper/dataDir=..\/tmp\/zookeeper\/logs/g' zookeeper-3.4.11/conf/zoo.cfg
+while IFS='' read -r line || [[ -n "$line" ]]; do
+    echo $line >> zookeeper-3.4.11/conf/zoo.cfg
+done < "$2"
+
+
