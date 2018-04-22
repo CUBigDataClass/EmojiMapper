@@ -13,3 +13,8 @@ nano /etc/yum.conf
 
 sudo service mongod start
 mongo --host 127.0.0.1:27017
+
+sudo service mongod stop
+
+sudo mkdir /data/db
+sudo chown ec2-user /data/db
