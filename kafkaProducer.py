@@ -8,18 +8,21 @@ import datetime
 
 def get_tweets(trend,date):
     enddate = date+datetime.timedelta(days=1)
-    rule = gen_rule_payload(trend+" lang:en",from_date=date.isoformat() ,to_date=enddate.isoformat(), results_per_call=10) # testing with a sandbox account
-    tweets=collect_results(rule, result_stream_args=args,max_results=10)
+    rule = gen_rule_payload(trend+" lang:en",from_date=date.isoformat() ,to_date=enddate.isoformat(), results_per_call=500) # testing with a sandbox account
+    tweets=collect_results(rule, result_stream_args=args,max_results=20000)
     return tweets
 
 def refine_tweet(tweet,trend,date):
     new_tweet={}
     new_tweet["message"]=tweet['text']
     new_tweet["date"]=date.isoformat()
-    new_tweet["tweet_id"]=tweets['id']
-    new_tweet["retweet_count"]=tweets['retweet_count']
+    new_tweet["tweet_id"]=tweet['id']
+    new_tweet["retweet_count"]=tweet['retweet_count']
     new_tweet["trend"]=trend
+    new_tweet["place"]=place
     return new_tweet
+
+
 
 def strdate_to_datetime(strdate):
     return date(int(strdate.split("-")[0]),int(strdate.split("-")[1]),int(strdate.split("-")[2]))
@@ -46,15 +49,14 @@ def get_search_list(start_date,end_date):
 
 
 def push_to_stream(start_date,end_date):
-    producer = KafkaProducer(bootstrap_servers=['172.31.23.238:9092','172.31.25.114:9092'])
     # produce json messages
-    producer = KafkaProducer(value_serializer=lambda m: json.dumps(m).encode('ascii'))
+    producer = KafkaProducer(bootstrap_servers=['172.31.22.45:9092'],value_serializer=lambda m: json.dumps(m).encode('ascii'))
     search_list=get_search_list(start_date,end_date)
     for query in search_list:
         tweets=get_tweets(query[0],query[1])
         for i in tweets:
             #print(refine_tweet(i))
-            producer.send('TwitterStream', refine_tweet(i))
+            producer.send('TwitterStream', refine_tweet(i,query[0],query[1]))
 
 
 os.environ["SEARCHTWEETS_USERNAME"] = "prashil.bhimani@colorado.edu"
