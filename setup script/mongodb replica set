@@ -1,0 +1,6 @@
+sudo nano /etc/mongod.conf
+sudo /etc/init.d/mongod restart
+rs.initiate()
+rs.add("172.31.45.178:27017")
+rs.add("172.31.38.118:27017")
+rs.status()
