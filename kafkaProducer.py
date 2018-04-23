@@ -54,9 +54,11 @@ def push_to_stream(start_date,end_date):
     search_list=get_search_list(start_date,end_date)
     for query in search_list:
         tweets=get_tweets(query[0],query[1])
+        
         for i in tweets:
             #print(refine_tweet(i))
             producer.send('TwitterStream', refine_tweet(i,query[0],query[1]))
+        print("Done : " + str(query))
 
 
 os.environ["SEARCHTWEETS_USERNAME"] = "prashil.bhimani@colorado.edu"
@@ -64,5 +66,4 @@ os.environ["SEARCHTWEETS_PASSWORD"] = "emojimapperspring2018"
 os.environ["SEARCHTWEETS_ENDPOINT"] = "https://gnip-api.twitter.com/search/fullarchive/accounts/greg-students/prod.json"
 
 args=load_credentials(filename="nothing_here.yaml", yaml_key="no_key_here")
-print("hi")
-push_to_stream(date(2016,10,1),date(2016,10,2))
+push_to_stream(date(2016,10,1),date(2016,10,30))
