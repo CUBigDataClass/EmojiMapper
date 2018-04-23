@@ -19,7 +19,7 @@ def refine_tweet(tweet,trend,date):
     new_tweet["tweet_id"]=tweet['id']
     new_tweet["retweet_count"]=tweet['retweet_count']
     new_tweet["trend"]=trend
-    new_tweet["place"]=place
+    new_tweet["place"]=tweet["place"]
     return new_tweet
 
 
