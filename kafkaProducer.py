@@ -43,7 +43,7 @@ def get_search_list(start_date,end_date):
     for date in trends.keys():
         if start_date<=strdate_to_datetime(date)<=end_date:
             for i in trends[date]:
-                search_list.append([i,start_date])
+                search_list.append([i,strdate_to_datetime(date)])
     return search_list
 
 
