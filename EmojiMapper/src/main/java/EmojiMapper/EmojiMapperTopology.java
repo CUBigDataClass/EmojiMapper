@@ -22,7 +22,8 @@ public class EmojiMapperTopology {
         TopologyBuilder builder = new TopologyBuilder();
         builder.setSpout("KafkaSpout", new TwitterStreamKafkaSpoutImitation() , 2);
         builder.setBolt("FilteredTweets", new FilterTweetsBolt()).shuffleGrouping("KafkaSpout");
-       
+        builder.setBolt("MongoInsertFilteredTweets", new MongoInsertFilteredTweetsBolt());
+
         Config config = new Config();
         config.setDebug(true);
 
