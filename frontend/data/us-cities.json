@@ -1,0 +1,254 @@
+{ "type": "FeatureCollection",
+  "features": [
+    { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-106.650422,35.084386]},
+      "properties": {"name": "Albuquerque"}
+    },
+    { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-84.39, 33.755]},
+      "properties": {"name": "Atlanta"}
+    },
+    { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-97.743061,30.267153]},
+      "properties": {"name": "Austin"}
+    },
+    { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-76.612189,39.290385]},
+      "properties": {"name": "Baltimore"}
+    },
+    { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-91.187147,30.451468]},
+      "properties": {"name": "Baton Rogue"}
+    },
+    { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-86.802490,33.520661]},
+      "properties": {"name": "Birmingham"}
+    },
+    { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-71.058880,42.360082]},
+      "properties": {"name": "Boston"}
+    },
+    { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-80.843127, 35.227087]},
+      "properties": {"name": "Charlotte"}
+    },
+    { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-87.6277, 41.881944]},
+      "properties": {"name": "Chicago"}
+    },
+    { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-84.512020,39.103118]},
+      "properties": {"name": "Cincinnati"}
+    },
+    { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-81.694361,41.499320]},
+      "properties": {"name": "Cleveland"}
+    },
+    { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-104.821363,38.833882]},
+      "properties": {"name": "Colorado Springs"}
+    },
+    { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-82.998794,39.961176]},
+      "properties": {"name": "Columbus"}
+    },
+    { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-96.796988,32.776664]},
+      "properties": {"name": "Dallas-Ft. Worth"}
+    },
+    { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-104.990251,39.739236]},
+      "properties": {"name": "Denver"}
+    },
+    { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-83.045754,42.331427]},
+      "properties": {"name": "Detroit"}
+    },
+    { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-106.485022,31.761878]},
+      "properties": {"name": "El Paso"}
+    },
+    { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-119.787125,36.737798]},
+      "properties": {"name": "Fresno"}
+    },
+    { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-79.791975, 36.072635]},
+      "properties": {"name": "Greensbro"}
+    },
+    { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-76.886701,40.273191]},
+      "properties": {"name": "Harrisburg"}
+    },
+    { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-157.858333, 21.306944]},
+      "properties": {"name": "Hololulu"}
+    },
+    { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-95.383056, 29.762778]},
+      "properties": {"name": "Houston"}
+    },
+    { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-86.158068, 39.768403]},
+      "properties": {"name": "Indianapolis"}
+    },
+    { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-81.493799, 40.866550]},
+      "properties": {"name": "Jackson"}
+    },
+    { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-81.655651, 30.332184]},
+      "properties": {"name": "Jacksonville"}
+    },
+    { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-98.484246, 39.011902]},
+      "properties": {"name": "Kansas City"}
+    },
+    { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-115.139830, 36.169941]},
+      "properties": {"name": "Las Vegas"}
+    },
+    { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-118.193739, 33.770050]},
+      "properties": {"name": "Long Beach"}
+    },
+    { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-118.247, 34.049]},
+      "properties": {"name": "Los Angeles"}
+    },
+    { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-85.758456, 38.252665]},
+      "properties": {"name": "Louisville"}
+    },
+    { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-90.048980, 35.149534]},
+      "properties": {"name": "Memphis"}
+    },
+    { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-111.831472, 33.415184]},
+      "properties": {"name": "Mesa"}
+    },
+    { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-80.224145, 25.787676]},
+      "properties": {"name": "Miami"}
+    },
+    { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-87.906474, 43.038902]},
+      "properties": {"name": "Milwaukee"}
+    },
+    { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-93.265011, 44.977753]},
+      "properties": {"name": "Minneapolis"}
+    },
+    { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-86.781602, 36.162664]},
+      "properties": {"name": "Nashville"}
+    },
+    { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-72.927884, 41.308274]},
+      "properties": {"name": "New Haven"}
+    },
+    { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-90.071532, 29.951066]},
+      "properties": {"name": "New Orleans"}
+    },
+    { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-73.987, 40.720]},
+      "properties": {"name": "New York"}
+    },
+    { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-76.285873, 36.850769]},
+      "properties": {"name": "Norflock"}
+    },
+    { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-97.516428, 35.467560]},
+      "properties": {"name": "Oklahoma City"}
+    },
+    { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-95.934503, 41.256537]},
+      "properties": {"name": "Omaha"}
+    },
+    { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-81.379236, 28.538335]},
+      "properties": {"name": "Orlando"}
+    },
+    { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-75.165222, 39.952584]},
+      "properties": {"name": "Philadelphia"}
+    },
+    { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-112.074037, 33.448377]},
+      "properties": {"name": "Phoenix"}
+    },
+    { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-79.995886, 40.440625]},
+      "properties": {"name": "Pittsburgh"}
+    },
+    { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-122.676482, 45.523062]},
+      "properties": {"name": "Portland"}
+    },
+    { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-71.412834, 41.823989]},
+      "properties": {"name": "Providence"}
+    },
+    { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-78.638179, 35.779590]},
+      "properties": {"name": "Raleigh"}
+    },
+    { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-77.436048, 37.540725]},
+      "properties": {"name": "Richmond"}
+    },
+    { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-121.494400, 38.581572]},
+      "properties": {"name": "Sacramento"}
+    },
+    { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-90.199404, 38.627003]},
+      "properties": {"name": "St. Louis"}
+    },
+    { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-111.891047, 40.760779]},
+      "properties": {"name": "Salt Lake City"}
+    },
+    { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-98.493628, 29.424122]},
+      "properties": {"name": "San Antonio"}
+    },
+    { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-117.161084, 32.715738]},
+      "properties": {"name": "San Diego"}
+    },
+    { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-122.417, 37.779]},
+      "properties": {"name": "San Francisco"}
+    },
+    { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-121.886329, 37.338208]},
+      "properties": {"name": "San Jose"}
+    },
+    { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-122.332071, 47.606209]},
+      "properties": {"name": "Seattle"}
+    },
+    { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-84.280733, 30.438256]},
+      "properties": {"name": "Tallahassee"}
+    },
+    { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-82.457178, 27.950575]},
+      "properties": {"name": "Tampa"}
+    },
+    { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-110.974711, 32.222607]},
+      "properties": {"name": "Tucson"}
+    },
+    { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-75.977985, 36.852926]},
+      "properties": {"name": "Virginia Beach"}
+    },
+    { "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-77.029, 38.896]},
+      "properties": {"name": "Washington"}
+    }]}
