@@ -26,22 +26,20 @@ public class TwitterStreamKafkaSpoutImitation extends BaseRichSpout{
 	SpoutOutputCollector _collector;
 	int count=0;
 	Random _rand;
-	@Override
 	public void nextTuple() {
 		// TODO Auto-generated method stub
 		Utils.sleep(100);
 		String[] s={
-				"{'message':'S1','date':'2106-10-01','tweet_id':12012,'retweet_count':121, 'trend':'#Mc'}",
-				"{'message':'S2','date':'2106-10-01','tweet_id':12012,'retweet_count':121, 'trend':'#Mc'}",
-				"{'message':'S3','date':'2106-10-01','tweet_id':12012,'retweet_count':121, 'trend':'#Mc'}",
-				"{'message':'S4','date':'2106-10-01','tweet_id':12012,'retweet_count':121, 'trend':'#Mc'}",
-				"{'message':'S5','date':'2106-10-01','tweet_id':12012,'retweet_count':121, 'trend':'#Mc'}"};
+				"{'message':'S1  An 😀awesome 😃string with a few 😉emojis!','date':'2016-10-01','tweet_id':12012,'retweet_count':121, 'trend':' #MACSelena'}",
+				"{'message':'S2','date':'2016-10-01','tweet_id':12012,'retweet_count':121, 'trend':' #MACSelena'}",
+				"{'message':'S3','date':'2016-10-01','tweet_id':12012,'retweet_count':121, 'trend':' #MACSelena'}",
+				"{'message':'S4','date':'2016-10-01','tweet_id':12012,'retweet_count':121, 'trend':' #MACSelena'}",
+				"{'message':'S5','date':'2016-10-01','tweet_id':12012,'retweet_count':121, 'trend':' #MACSelena'}"};
 		_collector.emit(new Values(s[count%5]));
 		count++;
 		
 	}
 
-	@Override
 	public void open(Map args0, TopologyContext arg1, SpoutOutputCollector collector) {
 		// TODO Auto-generated method stub
 		_collector = collector;
@@ -49,7 +47,6 @@ public class TwitterStreamKafkaSpoutImitation extends BaseRichSpout{
 		_rand = new Random();
 	}
 
-	@Override
 	public void declareOutputFields(OutputFieldsDeclarer declarer) {
 		
 		declarer.declare(new Fields("tweet"));
