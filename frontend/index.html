@@ -4,6 +4,7 @@
     <title>Emoji Visualizer</title>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://d3js.org/d3.v3.min.js"></script>
     <script src="https://d3js.org/topojson.v1.min.js"></script>
@@ -15,6 +16,9 @@
 
   <body>
     <!--<script type = "text/javascript" src="emoji.js"></script>-->
+    <!--<div id = "vizContent">-->
+
+
 
     <div id = "mapDiv">
       <svg id = "mapMain"></svg>
@@ -45,14 +49,6 @@
     var path = d3.geo.path()               // path generator that will convert GeoJSON to SVG paths
              .projection(projection);  		//tell path generator to use albersUsa projection
 
-    /*var tip = d3.tip()
-           .attr('class', 'd3-tip')
-           .offset([-10, 0])
-           .html(function(d) {
-             return "<strong>Frequency:</strong> <span style='color:red'></span>" //+ d.frequency + "</span>";
-           })*/
-
-
     d3.json("data/us.json",function(error, us){
       if (error) throw error;
 
@@ -73,69 +69,44 @@
       d3.json("data/us-cities.json",function(error, city){
         if (error) throw error;
 
-        /*var tooltip = d3.select("body")
-                        .append("div")
-                        .attr("class","tooltip")
-                        .style("opacity",0);*/
+        newcity = ["Albuquerque", "Atlanta", "Austin", "Baltimore", "Birmingham", "Boston", "Charlotte", "Chicago", "Cincinnati", "Cleveland", "Colorado Springs", "Columbus", "Dallas-Ft. Worth", "Denver", "Detroit", "El Paso", "Fresno", "Greensboro", "Harrisburg", "Honolulu", "Indianapolis", "Jackson", "Jacksonville", "Kansas City", "Las Vegas", "Long Beach", "Louisville", "Memphis", "Milwaukee", "Nashville", "New Haven"]
 
-        /*var tipMouseover = function(d) {
+        //citysubset =
+        //if (city.features.properties.name == "Atlanta")
+        //  console.log(city.features);
+        newfeat = []
 
-          var html = "<p> Okaykkkk </p>";
-          tooltip.html(html)
-                 .transition(200)
-                 .style("opacity",0.9)
+        for (i = 0;i < city.features.length;i++)
+        {
+              if (newcity.includes(city.features[i].properties.name) == true)
+                {  newfeat.push(city.features[i]);
+                }  //console.log(city.features[i].properties.name);
+        }
 
-        };*/
+        //console.log(newfeat);
 
-        /*gDataPoints.selectAll("path")
-         .data(city.features)
+        gDataPoints.selectAll("path")
+         .data(newfeat)
          .enter()
          .append("image")
-         .append("path")
          .attr("class","path")
-         .attr("xlink:href","data/1f354.svg")
+         .attr("xlink:href","https://raw.githubusercontent.com/HenrikJoreteg/emoji-images/master/pngs/basketball.png")
          .attr("x", function(d,i) {return projection(d.geometry.coordinates)[0];})
          .attr("y", function(d,i) {return projection(d.geometry.coordinates)[1];})
          .attr("width","20")
-         .attr("height","20");*/
+         .attr("height","20");
 
-
-         //.on("mouseover",tipMouseover);
-
-         gDataPoints.selectAll("path")
+         /*gDataPoints.selectAll("path")
           .data(city.features)
           .enter()
           .append("path")
           .attr("fill","#900")
           .attr("stroke","#999")
-          .attr("d",path);/*
-          .on("mouseover", function(d, i) { // show it and update html
-            // outline on mousover
-              d3.select(this)
-                .style("stroke", "gold")
-                .style("stroke-width", "2px");
-            // make tooltip appear, set text
-              d3.select("body #tooltip")
-                .style("opacity", 0.9)
-                .style("left", (d3.event.pageX + 5) + "px")
-                .style("top", (d3.event.pageY + 5) + "px");
-              d3.select("body #tooltip p")
-                .text("hello");
-
-            });*//*
-           .on("mouseout", function(d, i) {
-             tooltip.transition()
-                    .duration(500)
-                    .style("opacity", 0);
-           })*/
-
+          .attr("d",path);*/
       });
 
     </script>
 
-
   </body>
-
-
 
 </html>

@@ -33,3 +33,9 @@ svg#mapMain {
 	width : 960px;
 	height : 500px;
 }
+
+h2 {
+	font-size: 3em;
+	margin-top:15px;
+	margin-bottom: 5px;
+}

@@ -1,0 +1,21 @@
+{
+  "date": "2016-10-01",
+  "trends": [
+    {
+      "trend_name" : " #MACSelena",
+      "locations" : [
+        {"name" : "Albuquerque"},
+        {"name" : "Atlanta"},
+        {"name" : "Austin"}
+      ]
+    },
+    {
+      "trend_name" : " #TwerkNForDummiesTONIGHT",
+      "locations" : [
+        {"name" : "Albuquerque"},
+        {"name" : "Atlanta"},
+        {"name" : "Baltimore"}
+      ]
+    }
+  ]
+}
