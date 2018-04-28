@@ -30,7 +30,7 @@ public class TwitterStreamKafkaSpoutImitation extends BaseRichSpout{
 		// TODO Auto-generated method stub
 		Utils.sleep(100);
 		String[] s={
-				"{'message':'S1  An 😀awesome 😃string with a few 😉emojis!','date':'2016-10-01','tweet_id':12012,'retweet_count':121, 'trend':' #MACSelena'}",
+				"{'message':'S1  An \ud83d\udc95 awesome 😃string with a few 😉emojis!','date':'2016-10-01','tweet_id':12012,'retweet_count':121, 'trend':' #MACSelena'}",
 				"{'message':'S2','date':'2016-10-01','tweet_id':12012,'retweet_count':121, 'trend':' #MACSelena'}",
 				"{'message':'S3','date':'2016-10-01','tweet_id':12012,'retweet_count':121, 'trend':' #MACSelena'}",
 				"{'message':'S4','date':'2016-10-01','tweet_id':12012,'retweet_count':121, 'trend':' #MACSelena'}",

@@ -6,6 +6,25 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
+import com.mongodb.ServerAddress;
+
+import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.MongoCollection;
+
+import org.bson.Document;
+import java.util.Arrays;
+import com.mongodb.Block;
+
+import com.mongodb.client.MongoCursor;
+import static com.mongodb.client.model.Filters.*;
+import com.mongodb.client.result.DeleteResult;
+import static com.mongodb.client.model.Updates.*;
+import com.mongodb.client.result.UpdateResult;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.storm.task.OutputCollector;
 import org.apache.storm.task.TopologyContext;
 import org.apache.storm.topology.OutputFieldsDeclarer;
@@ -42,6 +61,7 @@ public class EmojiAggregatorBolt extends BaseRichBolt{
 			{
 				Iterator it = aggregate_map.entrySet().iterator();
 			    while (it.hasNext()) {
+			    	MongoClient mongoClient = new MongoClient( "" , 27017 );
 			        Map.Entry pair = (Map.Entry)it.next();
 			        System.out.println(pair.getKey() + " = " + pair.getValue());
 		

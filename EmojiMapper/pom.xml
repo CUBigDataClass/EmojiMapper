@@ -3,41 +3,46 @@
   <groupId>EmojiMapper</groupId>
   <artifactId>EmojiMapper</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <!-- https://mvnrepository.com/artifact/org.apache.storm/storm-core -->
-  <url>http://maven.apache.org</url>
+    <packaging>jar</packaging>
+
+    <name>emojimapper-storm-topology</name>
+    <url>http://maven.apache.org</url>
 
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
-    
-  </properties>
+    <properties>
+        <maven.compiler.source>1.7</maven.compiler.source>
+        <maven.compiler.target>1.7</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 
-  <repositories>
-    <repository>
-      <id>clojars.org</id>
-      <url>http://clojars.org/repo</url>
-    </repository>
-  </repositories>
+    <dependencies>
+    	<dependency>
+    		<groupId>org.apache.storm</groupId>
+    		<artifactId>storm-mongodb</artifactId>
+    		<version>1.0.2</version>
+    	</dependency>
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
+            <version>1.9.13</version>
+        </dependency>
 
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-    </dependency>
-    <!-- https://mvnrepository.com/artifact/org.apache.storm/storm-kafka -->
-
-    <dependency>
-      <groupId>org.apache.storm</groupId>
-      <artifactId>storm-mongodb</artifactId>
-      <version>1.2.1</version>
-    </dependency>
-<dependency>
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-client</artifactId>
+            <version>2.2.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- Dependency for Storm-Kafka spout -->
+        <dependency>
             <groupId>org.apache.storm</groupId>
             <artifactId>storm-kafka</artifactId>
-            <version>1.2.1</version>
+            <version>1.0.2</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.slf4j</groupId>
@@ -52,7 +57,10 @@
                     <artifactId>slf4j-log4j12</artifactId>
                 </exclusion>
 
-
+                <exclusion>
+                    <groupId>org.apache.kafka</groupId>
+                    <artifactId>kafka-clients</artifactId>
+                </exclusion>
             </exclusions>
         </dependency>
 
@@ -92,7 +100,7 @@
         <dependency>
             <groupId>org.apache.storm</groupId>
             <artifactId>storm-core</artifactId>
-            <version>1.2.1</version>
+            <version>1.0.2</version>
             <scope>provided</scope>
             <exclusions>
                 <exclusion>
@@ -110,23 +118,132 @@
             </exclusions>
 
         </dependency>
+
+        <dependency>
+            <groupId>com.datastax.cassandra</groupId>
+            <artifactId>cassandra-driver-core</artifactId>
+            <version>3.4.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>19.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.cassandra</groupId>
+            <artifactId>cassandra-all</artifactId>
+            <version>1.2.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+                <exclusion>
+                <groupId>org.slf4j</groupId>
+                <artifactId>log4j-over-slf4j</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>log4j</groupId>
+                    <artifactId>log4j</artifactId>
+                </exclusion>
+            </exclusions>
+
+        </dependency>
+
+        <dependency>
+            <groupId>com.netflix.astyanax</groupId>
+            <artifactId>astyanax</artifactId>
+            <version>3.9.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.netflix.astyanax</groupId>
+            <artifactId>astyanax-cassandra</artifactId>
+            <version>3.9.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.netflix.astyanax</groupId>
+            <artifactId>astyanax-thrift</artifactId>
+            <version>3.9.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.netflix.astyanax</groupId>
+            <artifactId>astyanax-contrib</artifactId>
+            <version>3.9.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.netflix.astyanax</groupId>
+            <artifactId>astyanax-core</artifactId>
+            <version>3.9.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.netflix.astyanax</groupId>
+            <artifactId>astyanax-cql</artifactId>
+            <version>3.9.0</version>
+        </dependency>
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>2.0</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/io.netty/netty-all -->
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+            <version>4.1.24.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>com.netflix.astyanax</groupId>
+            <artifactId>astyanax</artifactId>
+            <version>3.8.0</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>commons-lang</artifactId>
+                    <groupId>commons-lang</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/cc.mallet/mallet -->
+        <dependency>
+            <groupId>cc.mallet</groupId>
+            <artifactId>mallet</artifactId>
+            <version>2.0.8</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.storm/storm-cassandra -->
+        <dependency>
+            <groupId>org.apache.storm</groupId>
+            <artifactId>storm-cassandra</artifactId>
+            <version>1.0.0</version>
+        </dependency>
     <dependency>
   <groupId>com.vdurmont</groupId>
   <artifactId>emoji-java</artifactId>
   <version>4.0.0</version>
 </dependency>
-  </dependencies>
-  
-  <scm>
-    <connection>scm:git:git@github.com:mbonaci/my-own-storm.git</connection>
-    <url>scm:git:git@github.com:mbonaci/my-own-storm.git</url>
-    <developerConnection>scm:git:git@github.com:mbonaci/my-own-storm.git</developerConnection>
-  </scm>
 
 
+        <!--<dependency>-->
+            <!--<groupId>com.hmsonline</groupId>-->
+            <!--<artifactId>storm-cassandra</artifactId>-->
+            <!--<version>0.4.0-rc4</version>-->
+        <!--</dependency>-->
+        <!--&lt;!&ndash; Topic Model: https://mvnrepository.com/artifact/cc.mallet/mallet &ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>cc.mallet</groupId>-->
+            <!--<artifactId>mallet</artifactId>-->
+            <!--<version>2.0.8</version>-->
+        <!--</dependency>        -->
+    </dependencies>
 
+    <repositories>
+        <repository>
+            <id>clojars.org</id>
+            <url>http://clojars.org/repo</url>
+        </repository>
+    </repositories>
 
-<build>
+    <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -138,10 +255,11 @@
             </plugin>
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
-                <version>2.1</version>
+                <version>2.2.1</version>
                 <configuration>
                     <descriptorRefs>
-                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                        <descriptorRef>jar-with-dependencies
+                        </descriptorRef>
                     </descriptorRefs>
                     <archive>
                         <manifest>
@@ -162,6 +280,5 @@
         </plugins>
     </build>
 </project>
-
 
 

@@ -34,7 +34,7 @@ public class EmojiSplitterBolt extends BaseRichBolt{
 			JSONObject e=new JSONObject();
 			e.put("emoji",emoji);
 			e.put("trend", (String)jsonObj.get("trend"));
-			e.put("location", (String)jsonObj.get("location"));
+			//e.put("location", (String)jsonObj.get("location"));
 			e.put("date", (String)jsonObj.get("date"));
 			collector.emit(new Values(emoji,(String)jsonObj.get("location"),(String)jsonObj.get("date"),(String)jsonObj.get("trend")));
 		}
@@ -52,7 +52,7 @@ public class EmojiSplitterBolt extends BaseRichBolt{
 
 	public void declareOutputFields(OutputFieldsDeclarer declarer) {
 		// TODO Auto-generated method stub
-		declarer.declare(new Fields("emoji","location","date","trend"));
+		declarer.declare(new Fields("emoji","date","trend"));
 		
 	}
 	

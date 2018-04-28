@@ -21,6 +21,7 @@ public class FilterTweetsBolt extends BaseBasicBolt {
     public void execute(Tuple tuple, BasicOutputCollector collector) {
         String msg = tuple.getString(0);
         msg=msg.replaceAll("'", "\"");
+        msg = msg.replaceAll("^\"|\"$", "");
         JSONParser parser =new JSONParser();
         JSONObject jsonObj = null;
 		try {
@@ -29,10 +30,14 @@ public class FilterTweetsBolt extends BaseBasicBolt {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		List<String> result=EmojiParser.extractEmojis((String)jsonObj.get("message"));
-		if(!result.isEmpty()) {
-			System.out.println(jsonObj.toString());
-			collector.emit(new Values(jsonObj.toString()));
+		if(jsonObj!=null) {
+			if((String)jsonObj.get("message")!=null) {
+				List<String> result=EmojiParser.extractEmojis((String)jsonObj.get("message"));
+				if(!result.isEmpty()) {
+					System.out.println(jsonObj.toString());
+					collector.emit(new Values(jsonObj.toString()));
+				}
+			}
 		}
     }
 
