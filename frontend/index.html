@@ -8,12 +8,17 @@
     <script src="https://d3js.org/d3.v3.min.js"></script>
     <script src="https://d3js.org/topojson.v1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+    <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
     <!--<script src="data/emoji.json" />-->
     <!--<script type = "text/javascript" src="geovis.js"></script>-->
   </head>
 
   <body>
     <!--<script type = "text/javascript" src="emoji.js"></script>-->
+
+    <div id = "mapDiv">
+      <svg id = "mapMain"></svg>
+    </div>
 
     <script>
 
@@ -22,8 +27,8 @@
     var height = 500;
 
     //Create SVG element and append map to the SVG
-    var svg = d3.select("body")
-                .append("svg")
+    var svg = d3.select("svg#mapMain")
+                //.append("svg")
                 .attr("width", width)
                 .attr("height", height);
 
@@ -39,6 +44,13 @@
     // Define path generator
     var path = d3.geo.path()               // path generator that will convert GeoJSON to SVG paths
              .projection(projection);  		//tell path generator to use albersUsa projection
+
+    /*var tip = d3.tip()
+           .attr('class', 'd3-tip')
+           .offset([-10, 0])
+           .html(function(d) {
+             return "<strong>Frequency:</strong> <span style='color:red'></span>" //+ d.frequency + "</span>";
+           })*/
 
 
     d3.json("data/us.json",function(error, us){
@@ -61,37 +73,63 @@
       d3.json("data/us-cities.json",function(error, city){
         if (error) throw error;
 
-        gDataPoints.selectAll("path")
+        /*var tooltip = d3.select("body")
+                        .append("div")
+                        .attr("class","tooltip")
+                        .style("opacity",0);*/
+
+        /*var tipMouseover = function(d) {
+
+          var html = "<p> Okaykkkk </p>";
+          tooltip.html(html)
+                 .transition(200)
+                 .style("opacity",0.9)
+
+        };*/
+
+        /*gDataPoints.selectAll("path")
          .data(city.features)
          .enter()
          .append("image")
+         .append("path")
          .attr("class","path")
          .attr("xlink:href","data/1f354.svg")
          .attr("x", function(d,i) {return projection(d.geometry.coordinates)[0];})
          .attr("y", function(d,i) {return projection(d.geometry.coordinates)[1];})
          .attr("width","20")
-         .attr("height","20");
+         .attr("height","20");*/
 
-         /*gDataPoints.selectAll("path")
+
+         //.on("mouseover",tipMouseover);
+
+         gDataPoints.selectAll("path")
           .data(city.features)
           .enter()
           .append("path")
           .attr("fill","#900")
           .attr("stroke","#999")
-          .attr("d",path);*/
+          .attr("d",path);/*
+          .on("mouseover", function(d, i) { // show it and update html
+            // outline on mousover
+              d3.select(this)
+                .style("stroke", "gold")
+                .style("stroke-width", "2px");
+            // make tooltip appear, set text
+              d3.select("body #tooltip")
+                .style("opacity", 0.9)
+                .style("left", (d3.event.pageX + 5) + "px")
+                .style("top", (d3.event.pageY + 5) + "px");
+              d3.select("body #tooltip p")
+                .text("hello");
 
-
+            });*//*
+           .on("mouseout", function(d, i) {
+             tooltip.transition()
+                    .duration(500)
+                    .style("opacity", 0);
+           })*/
 
       });
-
-      /*d3.json("data/emoji.json",function(error,emoji){
-        if (error) throw error;
-
-        console.log(emoji[2].char);
-
-        gDataPoints.append
-      });*/
-
 
     </script>
 

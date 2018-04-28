@@ -19,3 +19,17 @@
   stroke-linecap: round;
   pointer-events: none;
 }
+
+div#mapDiv {
+	z-index: 1;
+	position: absolute;
+	top: 50px;
+	right: -100px;
+
+  /*border:1px solid black;*/
+}
+
+svg#mapMain {
+	width : 960px;
+	height : 500px;
+}
