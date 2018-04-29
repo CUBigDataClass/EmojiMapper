@@ -45,7 +45,7 @@ public class EmojiAggregatorBolt extends BaseRichBolt{
 	
 	public void execute(Tuple t) {
 		// TODO Auto-generated method stub
-		String tweet_obj = (String) t.getValue(1)+" "+(String) t.getValue(2)+" "+(String) t.getValue(3) + " "+(String) t.getValue(0);
+		String tweet_obj = (String) t.getValue(0)+"|"+(String) t.getValue(1)+"|"+(String) t.getValue(2);
 
 			Integer value = aggregate_map.get(tweet_obj);
 			if (value == null)

@@ -34,15 +34,22 @@ public class FilterTweetsBolt extends BaseBasicBolt {
 			if((String)jsonObj.get("message")!=null) {
 				List<String> result=EmojiParser.extractEmojis((String)jsonObj.get("message"));
 				if(!result.isEmpty()) {
-					System.out.println(jsonObj.toString());
-					collector.emit(new Values(jsonObj.toString()));
+					collector.emit(
+							new Values(
+									(String)jsonObj.get("message"),
+									(String)jsonObj.get("date"),
+									(String)jsonObj.get("trend"),
+									(String)jsonObj.get("tweet_id"),
+									(String)jsonObj.get("retweet_count")
+									)
+							);
 				}
 			}
 		}
     }
 
     public void declareOutputFields(OutputFieldsDeclarer declarer) {
-        declarer.declare(new Fields("tweets"));
+        declarer.declare(new Fields("tweet","date","trend","tweetid","retweet_count"));
     }
 
 

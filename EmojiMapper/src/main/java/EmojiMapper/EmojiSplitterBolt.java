@@ -21,22 +21,13 @@ public class EmojiSplitterBolt extends BaseRichBolt{
 	JSONParser parser;
 	
 	public void execute(Tuple t) {
-		String msg = t.getString(0);
+		String msg = t.getStringByField("message");
+		String date=t.getStringByField("date");
+		String trend=t.getStringByField("trend");
 		JSONObject jsonObj = null;
-		try {
-			jsonObj = (JSONObject)parser.parse(msg);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		List<String> result=EmojiParser.extractEmojis((String)jsonObj.get("message"));
+		List<String> result=EmojiParser.extractEmojis(msg);
 		for(String emoji : result) {
-			JSONObject e=new JSONObject();
-			e.put("emoji",emoji);
-			e.put("trend", (String)jsonObj.get("trend"));
-			//e.put("location", (String)jsonObj.get("location"));
-			e.put("date", (String)jsonObj.get("date"));
-			collector.emit(new Values(emoji,(String)jsonObj.get("location"),(String)jsonObj.get("date"),(String)jsonObj.get("trend")));
+			collector.emit(new Values(emoji,date,trend));
 		}
 		// TODO Auto-generated method stub
 		
