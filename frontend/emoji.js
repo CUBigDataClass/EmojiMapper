@@ -39,7 +39,7 @@ d3.json("data/us.json",function(error, us){
 		if (error) throw error;
 
 		city = d3.shuffle(city.features)
-		
+
 		g.append("circle")
 		 .data()
 	})

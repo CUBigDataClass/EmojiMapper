@@ -1,0 +1,25 @@
+sudo nano /etc/mongod.conf
+  sharding:
+    clusterRole: configsvr
+  replication:
+    replSetName: myReplicationSet
+  net:
+    bindIpAll: true
+    
+mongod --config /etc/mongod.conf
+mongod --configsvr --replSet myReplicationSet --dbpath /data/db
+mongo --host 172.31.39.157 --port 27017
+    rs.initiate(
+      {
+        _id: "myReplicationSet",
+        configsvr: true,
+        members: [
+          { _id : 0, host : "172.31.39.157:27017" },
+          { _id : 1, host : "172.31.45.178:27017" }
+        ]
+      }
+    )
+    
+    rs.add("172.31.38.118:27017")
+    rs.conf()
+    rs.status()

@@ -4,54 +4,73 @@
     <title>Emoji Visualizer</title>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://d3js.org/d3.v3.min.js"></script>
     <script src="https://d3js.org/topojson.v1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
     <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
-    <!--<script src="data/emoji.json" />-->
-    <!--<script type = "text/javascript" src="geovis.js"></script>-->
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script src="wordcloud2.js"></script>
   </head>
 
   <body>
-    <!--<script type = "text/javascript" src="emoji.js"></script>-->
+
+    <div id = "sliderDiv">
+      <svg id ="sliderMain"></svg>
+    </div>
 
     <div id = "mapDiv">
       <svg id = "mapMain"></svg>
     </div>
 
+    <div id="wordcloudDiv">
+      <canvas id="canvas_cloud"></canvas>
+    </div>
+
     <script>
 
+    // *********************** Defining the map variables here ***********************
     //Width and height of map
-    var width = 960;
-    var height = 500;
+    var mapWidth = 960;
+    var mapHeight = 500;
 
     //Create SVG element and append map to the SVG
     var svg = d3.select("svg#mapMain")
-                //.append("svg")
-                .attr("width", width)
-                .attr("height", height);
+                .attr("width", mapWidth)
+                .attr("height", mapHeight);
 
-    //var g = svg.append("g");
     var gBackground = svg.append("g");
     var gDataPoints = svg.append("g");
 
     // D3 Projection
     var projection = d3.geo.albersUsa()
-               .translate([width/2, height/2])    // translate to center of screen
+               .translate([mapWidth/2, mapHeight/2])    // translate to center of screen
                .scale([1000]);          					// scale things down so see entire US
 
     // Define path generator
     var path = d3.geo.path()               // path generator that will convert GeoJSON to SVG paths
              .projection(projection);  		//tell path generator to use albersUsa projection
 
-    /*var tip = d3.tip()
-           .attr('class', 'd3-tip')
-           .offset([-10, 0])
-           .html(function(d) {
-             return "<strong>Frequency:</strong> <span style='color:red'></span>" //+ d.frequency + "</span>";
-           })*/
+    // *********************** End of the map variables **************************************
 
+    // *********************** Start to defining date slider variables ***********************
+
+    var formatDateOnTop = d3.time.format("%b %d %Y")
+    var formatDateOnSlider = d3.time.format("%b %Y")
+
+    var margin = {top:0, right:50, bottom:0, left:50},
+    sliderWidth = 960 -margin.left - margin.right,
+    sliderHeight = 500 - margin.top - margin.bottom;
+
+    var slidersvg = d3.select("svg#sliderMain")
+                      .attr("width",sliderWidth)
+                      .attr("height",sliderHeight);
+
+    // ************************ End of slider variables *************************************
+
+    // ************************ Defining Map Functions **************************************
 
     d3.json("data/us.json",function(error, us){
       if (error) throw error;
@@ -63,7 +82,7 @@
         .enter().append("path")
         .attr("d", path);
 
-        gBackground.append("path")
+      gBackground.append("path")
           .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
           .attr("id", "state-borders")
           .attr("d", path);
@@ -73,69 +92,72 @@
       d3.json("data/us-cities.json",function(error, city){
         if (error) throw error;
 
-        /*var tooltip = d3.select("body")
-                        .append("div")
-                        .attr("class","tooltip")
-                        .style("opacity",0);*/
+        newcity = ["Albuquerque", "Atlanta", "Austin", "Baltimore", "Birmingham", "Boston", "Charlotte", "Chicago", "Cincinnati", "Cleveland", "Colorado Springs", "Columbus", "Dallas-Ft. Worth", "Denver", "Detroit", "El Paso", "Fresno", "Greensboro", "Harrisburg", "Honolulu", "Indianapolis", "Jackson", "Jacksonville", "Kansas City", "Las Vegas", "Long Beach", "Louisville", "Memphis", "Milwaukee", "Nashville", "New Haven"]
 
-        /*var tipMouseover = function(d) {
+        newfeat = []
+        for (i = 0;i < city.features.length;i++)
+        {
+              if (newcity.includes(city.features[i].properties.name) == true)
+                {  newfeat.push(city.features[i]);
+                }
+        }
 
-          var html = "<p> Okaykkkk </p>";
-          tooltip.html(html)
-                 .transition(200)
-                 .style("opacity",0.9)
-
-        };*/
-
-        /*gDataPoints.selectAll("path")
-         .data(city.features)
+        gDataPoints.selectAll("path")
+         .data(newfeat)
          .enter()
          .append("image")
-         .append("path")
          .attr("class","path")
          .attr("xlink:href","data/1f354.svg")
          .attr("x", function(d,i) {return projection(d.geometry.coordinates)[0];})
          .attr("y", function(d,i) {return projection(d.geometry.coordinates)[1];})
          .attr("width","20")
-         .attr("height","20");*/
-
-
-         //.on("mouseover",tipMouseover);
-
-         gDataPoints.selectAll("path")
-          .data(city.features)
-          .enter()
-          .append("path")
-          .attr("fill","#900")
-          .attr("stroke","#999")
-          .attr("d",path);/*
-          .on("mouseover", function(d, i) { // show it and update html
-            // outline on mousover
-              d3.select(this)
-                .style("stroke", "gold")
-                .style("stroke-width", "2px");
-            // make tooltip appear, set text
-              d3.select("body #tooltip")
-                .style("opacity", 0.9)
-                .style("left", (d3.event.pageX + 5) + "px")
-                .style("top", (d3.event.pageY + 5) + "px");
-              d3.select("body #tooltip p")
-                .text("hello");
-
-            });*//*
-           .on("mouseout", function(d, i) {
-             tooltip.transition()
-                    .duration(500)
-                    .style("opacity", 0);
-           })*/
+         .attr("height","20");
 
       });
 
+      /*d3.json("data/sample.json", function(error, datetrends){
+        if (error) throw error;
+
+        var startDate = new Date(datetrends[0].date);
+        var endDate = new Date(datetrends[datetrends.length - 1].date);
+
+        var x = d3.time.scale()
+                  .domain([startDate, endDate])
+                  .range([0, sliderWidth])
+                  .clamp(true);
+
+        var slider = slidersvg.append("g")
+                .append("class","slider")
+                .attr("transform","translate(" + margin.left + "," + height/2 + ")");
+
+      });*/
+
+      var div = document.getElementById("wordcloudDiv");
+
+      var canvas = document.getElementById("canvas_cloud");
+
+      canvas.height = div.offsetHeight;
+
+      canvas.width  = div.offsetWidth;
+
+      var options =
+      {
+        list : [
+          ["😊", "9"],
+          ["😍", "3"],
+          ["😚", "8"],
+          ["🙄", "5"]
+        ],
+        gridSize: Math.round(16 * 2),//document.getElementById('canvas_cloud').offsetWidth / 1024),
+        weightFactor: function (size) {
+          return Math.pow(size, 1.9) * 2;//document.getElementById('canvas_cloud').offsetWidth / 1024;
+        }
+      }
+
+      WordCloud(document.getElementById('canvas_cloud'), options);
+
     </script>
 
-
   </body>
-
-
 
 </html>
