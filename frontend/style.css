@@ -39,3 +39,15 @@ h2 {
 	margin-top:15px;
 	margin-bottom: 5px;
 }
+
+div#wordcloudDiv {
+  position: absolute;
+	top: 50px;
+	left: 50px;
+
+}
+
+canvas#canvas_cloud{
+  width: 100%;
+  height:500px;
+}
