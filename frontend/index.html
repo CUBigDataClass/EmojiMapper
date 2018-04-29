@@ -143,14 +143,44 @@
       var options =
       {
         list : [
-          ["😊", "9"],
-          ["😍", "3"],
-          ["😚", "8"],
-          ["🙄", "5"]
+          ["😮", "5"], 
+          ["🤐", "7"], 
+          ["😯", "3"], 
+          ["😪", "8"], 
+          ["😫", "9"], 
+          ["😴", "1"], 
+          ["😌", "4"], 
+          ["😛", "6"], 
+          ["😜", "4"], 
+          ["😝", "7"], 
+          ["🤤", "9"], 
+          ["😒", "10"], 
+          ["😓", "2"], 
+          ["😔", "3"], 
+          ["😕", "13"], 
+          ["🙃", "11"],
+          ["🤑", "1"],
+          ["😲", "13"], 
+          ["☹", "12"], 
+          ["🙁", "6"], 
+          ["😖", "7"], 
+          ["😞", "9"], 
+          ["😟", "6"], 
+          ["😤", "4"], 
+          ["😢", "3"], 
+          ["😭", "10"], 
+          ["😰", "1"], 
+          ["😱", "11"],
+          ["😳", "5"], 
+          ["🤪", "1"], 
+          ["😵", "3"], 
+          ["😡", "4"],
+          ["😠", "3"], 
+          ["🤬", "1"] 
         ],
-        gridSize: Math.round(16 * 2),//document.getElementById('canvas_cloud').offsetWidth / 1024),
+        gridSize: Math.round(16 * document.getElementById('canvas_cloud').offsetWidth / 1024),
         weightFactor: function (size) {
-          return Math.pow(size, 1.9) * 2;//document.getElementById('canvas_cloud').offsetWidth / 1024;
+          return Math.pow(size, 1) *document.getElementById('canvas_cloud').offsetWidth/25;
         }
       }
 
