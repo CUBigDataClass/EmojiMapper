@@ -48,6 +48,6 @@ div#wordcloudDiv {
 }
 
 canvas#canvas_cloud{
-  width: 100%;
-  height:500px;
+  width: 475px;
+  height: 500px;
 }
