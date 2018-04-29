@@ -1,0 +1,42 @@
+sudo nano /etc/mongod.conf
+    sharding:
+       clusterRole: shardsvr
+    replication:
+       replSetName: rs1
+    net:
+       bindIpAll: true
+
+mongod --shardsvr --replSet rs1  --dbpath /data/db
+mongo --172.31.36.98  --port 27017
+    rs.initiate(
+      {
+        _id : <replicaSetName>,
+        members: [
+          { _id : 0, host : "172.31.36.98:27018" },
+          { _id : 1, host : "172.31.42.144:27018" },
+          { _id : 2, host : "172.31.32.161:27018" }
+        ]
+      }
+    )
+
+
+sudo nano /etc/mongod.conf
+    sharding:
+       clusterRole: shardsvr
+    replication:
+       replSetName: rs2
+    net:
+       bindIpAll: true
+
+mongod --shardsvr --replSet rs2  --dbpath /data/db
+mongo --172.31.37.17  --port 27017
+    rs.initiate(
+      {
+        _id : rs2,
+        members: [
+          { _id : 0, host : "172.31.37.17:27018" },
+          { _id : 1, host : "172.31.40.136:27018" },
+          { _id : 2, host : "172.31.37.193:27018" }
+        ]
+      }
+    )
