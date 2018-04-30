@@ -13,12 +13,15 @@ class Home extends Component {
       date: new Date(),
       picklistOptions: ['none'],
       picklistValue: '',
-      locations: ['none']
+      locations: ['none'],
+      emoji: []
     };
 
     this.getHashTags = this.getHashTags.bind(this);
     this.getLocation = this.getLocation.bind(this);
+    this.getEmoji = this.getEmoji.bind(this);
     this.dateFormat = '';
+    this.trendData = '';
   }
 
   getHashTags(date) {
@@ -32,13 +35,23 @@ class Home extends Component {
   }
 
   getLocation(trend) {
-    let trends = trend.match('#') ? trend.replace('#', '%23') : trend;
-    fetch(`/api/test/${this.dateFormat}/${trends}`)
+    fetch(`/api/test/${this.dateFormat}/${trend}`)
       .then(res => res.json())
       .then(json => {
         this.setState({
           locations : json[0].locations[this.state.picklistValue]
         })
+      });
+  }
+
+  getEmoji() {
+    fetch(`/api/emoji/${this.dateFormat}/${this.trendData}`)
+      .then(res => res.json())
+      .then(json => {
+        this.setState({
+          emoji : json,
+        })
+        console.log(this.state.emoji);
       });
   }
 
@@ -51,7 +64,11 @@ class Home extends Component {
 
   handlePicklistValueChange(value) {
     this.setState({ picklistValue : value.value });
-    this.getLocation(value.value);
+    let trend = value.value;
+    let trends = trend.match('#') ? trend.replace('#', '%23') : trend;
+    this.getLocation(trends);
+    this.trendData = trends;
+    this.getEmoji();
   }
 
   render() {
@@ -61,31 +78,34 @@ class Home extends Component {
     }
 
     const styles2 = {
-      paddingRight: '20px',
-      float:'right'
+      paddingRight: '60px'
+    }
+
+    const listStyle = {
+      paddingLeft: '60px'
     }
 
     return (
       <div style={styles}>
-        <div>
+        <div style={styles2}>
             <DatePicker
               onChange={this.onChange.bind(this)}
               value={this.state.date}
             />
         </div>
-        <br/>
-        <br/>
-          <div styles={styles2}>
+          <div>
             <Dropdown options={this.state.picklistOptions} onChange={this.handlePicklistValueChange.bind(this)} value={this.state.picklistValue} placeholder="Select an option" />
           </div>
-        <br/>
-        <br/>
-          <div>
-            {this.state.locations}
+          <div style={listStyle}>
+            <ul>
+                {this.state.locations.map(function(name, index){
+                  if(index)
+                    return <li key={ index }>{name}</li>;
+                  })}
+            </ul>
           </div>
       </div>
     );
   }
 }
-
 export default Home;
