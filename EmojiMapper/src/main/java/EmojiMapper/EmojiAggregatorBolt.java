@@ -45,7 +45,7 @@ public class EmojiAggregatorBolt extends BaseRichBolt{
 	
 	public void execute(Tuple t) {
 		// TODO Auto-generated method stub
-		String tweet_obj = (String) t.getValue(0)+"|"+(String) t.getValue(1)+"|"+(String) t.getValue(2);
+			String tweet_obj = (String) t.getValue(0)+"|"+(String) t.getValue(1)+"|"+(String) t.getValue(2);
 
 			Integer value = aggregate_map.get(tweet_obj);
 			if (value == null)
@@ -54,18 +54,25 @@ public class EmojiAggregatorBolt extends BaseRichBolt{
 				
 			}
 			value++;
+			value=(int) (value+t.getLong(3));
 			aggregate_map.put(tweet_obj, value);
 			count++;
 			System.out.println(count);
-			if ((count % 100) == 0)
+			if ((count % 1000) == 0)
 			{
 				Iterator it = aggregate_map.entrySet().iterator();
 			    while (it.hasNext()) {
-			    	MongoClient mongoClient = new MongoClient( "" , 27017 );
-			        Map.Entry pair = (Map.Entry)it.next();
-			        System.out.println(pair.getKey() + " = " + pair.getValue());
-		
+			    	
+			    	
+			    	// Get current value in Db
+			    	Map.Entry pair = (Map.Entry)it.next();
+			    	String[] result=((String) pair.getKey()).split("|");
+			    	collector.emit(new Values(result[0],result[1],result[2],pair.getKey()));
+			    	
+			    	
+			        
 			    }
+			    aggregate_map.clear();
 				
 			}
 		
@@ -81,7 +88,7 @@ public class EmojiAggregatorBolt extends BaseRichBolt{
 
 	public void declareOutputFields(OutputFieldsDeclarer declarer) {
 		// TODO Auto-generated method stub
-		declarer.declare(new Fields("obj","aggregated_count"));
+		declarer.declare(new Fields("emoji","date","trend","count"));
 		
 	}
 

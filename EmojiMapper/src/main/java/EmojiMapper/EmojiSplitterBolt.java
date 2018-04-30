@@ -21,29 +21,26 @@ public class EmojiSplitterBolt extends BaseRichBolt{
 	JSONParser parser;
 	
 	public void execute(Tuple t) {
-		String msg = t.getStringByField("message");
-		String date=t.getStringByField("date");
-		String trend=t.getStringByField("trend");
-		JSONObject jsonObj = null;
+		String msg = (String)t.getString(0);
+		String date=t.getString(1);
+		String trend=t.getString(2);
+		Long retweet_count = t.getLongByField("retweet_count");
+		Long tweet_id = t.getLongByField("tweet_id");
 		List<String> result=EmojiParser.extractEmojis(msg);
 		for(String emoji : result) {
-			collector.emit(new Values(emoji,date,trend));
+			collector.emit(new Values(emoji,date,trend,retweet_count));
 		}
-		// TODO Auto-generated method stub
-		
+	
 	}
-
 	public void prepare(Map arg0, TopologyContext arg1, OutputCollector arg2) {
 		// TODO Auto-generated method stub
 		this.collector=arg2;
 		this.parser=new JSONParser();
-		
-		
 	}
 
 	public void declareOutputFields(OutputFieldsDeclarer declarer) {
 		// TODO Auto-generated method stub
-		declarer.declare(new Fields("emoji","date","trend"));
+		declarer.declare(new Fields("emoji","date","trend","retweet_count"));
 		
 	}
 	

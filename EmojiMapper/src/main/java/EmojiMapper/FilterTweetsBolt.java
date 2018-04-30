@@ -39,8 +39,8 @@ public class FilterTweetsBolt extends BaseBasicBolt {
 									(String)jsonObj.get("message"),
 									(String)jsonObj.get("date"),
 									(String)jsonObj.get("trend"),
-									(String)jsonObj.get("tweet_id"),
-									(String)jsonObj.get("retweet_count")
+									jsonObj.get("tweet_id"),
+									jsonObj.get("retweet_count")
 									)
 							);
 				}
@@ -49,7 +49,7 @@ public class FilterTweetsBolt extends BaseBasicBolt {
     }
 
     public void declareOutputFields(OutputFieldsDeclarer declarer) {
-        declarer.declare(new Fields("tweet","date","trend","tweetid","retweet_count"));
+        declarer.declare(new Fields("tweet","date","trend","tweet_id","retweet_count"));
     }
 
 
