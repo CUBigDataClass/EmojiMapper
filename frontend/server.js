@@ -4,13 +4,6 @@ var fs = require('fs');
 const mongoose = require('mongoose');
 
 //Get Database connection
-mongoose.connect('mongodb://52.34.5.62:27017/revidx')
-
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-
-
-const Emoji = mongoose.model('Emoji', new mongoose.Schema(), 'emojiCount');
 
 
 var app = express();
@@ -26,10 +19,9 @@ app.get('/', function(req, res) {
     title: 'Welcome'
   });
 });
-
-
-  app.get('/api/test', (req, res, next) => {
-  	mongoose.connect('mongodb://52.34.5.62:27017/revidx')
+app.get('/api/r_index', (req, res, next) => {
+  	mongoose.connect('mongodb://34.217.144.234/tweetsdb')
+  	console.log("hi")
 	var db = mongoose.connection;
 	db.on('error', console.error.bind(console, 'connection error:'));
 	const DateTrend = mongoose.model('DateTrend', new mongoose.Schema(), 'coll');
@@ -38,16 +30,26 @@ app.get('/', function(req, res) {
       .exec()
       .then((date) => res.json(date))
       .catch((err) => next(err));
-  });
+});
+app.get('/api/r_index/:date', function (req, res, next) {
+  	mongoose.connect('mongodb://34.217.144.234/tweetsdb')
+  	console.log("hi1")
+	var db = mongoose.connection;
+	db.on('error', console.error.bind(console, 'connection error:'));
+	const DateTrend = mongoose.model('DateTrend', new mongoose.Schema(), 'coll');
 
-  app.get('/api/test/:date', function (req, res, next) {
     DateTrend.find({ date: req.params.date }, {trends: 1, _id: 0})
       .exec()
       .then((data) => res.json(data))
       .catch((err) => next(err));
   });
 
-  app.get('/api/test/:date/:trends', function (req, res, next) {
+  app.get('/api/r_index/:date/:trends', function (req, res, next) {
+  	mongoose.connect('mongodb://34.217.144.234/tweetsdb')
+  	console.log("hi1")
+	var db = mongoose.connection;
+	db.on('error', console.error.bind(console, 'connection error:'));
+	const DateTrend = mongoose.model('DateTrend', new mongoose.Schema(), 'coll');
     var locationTrend = req.params.trends;
     DateTrend.find({ date: req.params.date }, {[`locations.${locationTrend}`] : 1, _id: 0})
       .exec()
@@ -56,6 +58,14 @@ app.get('/', function(req, res) {
   });
 
   app.get('/api/emoji/:date/:trends', function (req, res, next) {
+  	mongoose.connect('mongodb://34.217.144.234/tweetsdb')
+  	console.log("hi1")
+	var db = mongoose.connection;
+	db.on('error', console.error.bind(console, 'connection error:'));
+	const DateTrend = mongoose.model('DateTrend', new mongoose.Schema(), 'emojiCount');
+
+  	const Emoji = mongoose.model('Emoji', new mongoose.Schema(), 'emojiCount');
+
     var locationTrend = req.params.trends;
     console.log(req.params);
     Emoji.aggregate([ { $match: { "date": req.params.date, "trend": req.params.trends } }, 
@@ -66,6 +76,23 @@ app.get('/', function(req, res) {
   });
 
 
+  app.get('/api/tweets/:date/:trends', function (req, res, next) {
+  	mongoose.connect('mongodb://34.217.144.234/tweetsdb')
+  	console.log("hi1")
+	var db = mongoose.connection;
+	db.on('error', console.error.bind(console, 'connection error:'));
+	const DateTrend = mongoose.model('DateTrend', new mongoose.Schema(), 'filteredTweets');
+
+  	const Emoji = mongoose.model('Emoji', new mongoose.Schema(), 'emojiCount');
+
+    var locationTrend = req.params.trends;
+    console.log(req.params);
+    Emoji.aggregate([ { $match: { "date": req.params.date, "trend": req.params.trends } }, 
+                        { $group: { _id: "$emoji", total: { $sum: "$count"} } } ])
+      .exec()
+      .then((emoji) => res.json(emoji))
+      .catch((err) => next(err));
+  });
 
 app.listen(process.env.PORT||8000);
 
