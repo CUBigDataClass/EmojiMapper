@@ -1,0 +1,15 @@
+{
+  "name": "emojimapper",
+  "version": "1.0.0",
+  "description": "CU Boulder Big data project",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Prashil Bhimani, Anupama, Harshini Priya, Shantanu",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.3",
+    "jade": "^1.11.0"
+  }
+}
