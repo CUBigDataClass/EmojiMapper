@@ -63,9 +63,7 @@ app.get('/api/r_index/:date', function (req, res, next) {
 	var db = mongoose.connection;
 	db.on('error', console.error.bind(console, 'connection error:'));
 	const DateTrend = mongoose.model('DateTrend', new mongoose.Schema(), 'emojiCount');
-
   	const Emoji = mongoose.model('Emoji', new mongoose.Schema(), 'emojiCount');
-
     var locationTrend = req.params.trends;
     console.log(req.params);
     Emoji.aggregate([ { $match: { "date": req.params.date, "trend": req.params.trends } }, 
@@ -82,15 +80,14 @@ app.get('/api/r_index/:date', function (req, res, next) {
 	var db = mongoose.connection;
 	db.on('error', console.error.bind(console, 'connection error:'));
 	const DateTrend = mongoose.model('DateTrend', new mongoose.Schema(), 'filteredTweets');
-
-  	const Emoji = mongoose.model('Emoji', new mongoose.Schema(), 'emojiCount');
-
+  	const Tweet = mongoose.model('Tweet', new mongoose.Schema(), 'filteredTweets');
     var locationTrend = req.params.trends;
     console.log(req.params);
-    Emoji.aggregate([ { $match: { "date": req.params.date, "trend": req.params.trends } }, 
-                        { $group: { _id: "$emoji", total: { $sum: "$count"} } } ])
+    Tweet.find({"date" : req.params.date, "trend" : req.params.trends},{_id : 0, "tweet": 1})
+                  .sort({"retweet_count": -1})
+                      .limit(10)
       .exec()
-      .then((emoji) => res.json(emoji))
+      .then((tweets) => res.json(tweets))
       .catch((err) => next(err));
   });
 
