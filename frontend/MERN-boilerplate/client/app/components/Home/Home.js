@@ -61,7 +61,8 @@ class Home extends Component {
     }
 
     const styles2 = {
-      paddingRight: '20px'
+      paddingRight: '20px',
+      float:'right'
     }
 
     return (
@@ -72,11 +73,13 @@ class Home extends Component {
               value={this.state.date}
             />
         </div>
-
+        <br/>
+        <br/>
           <div styles={styles2}>
             <Dropdown options={this.state.picklistOptions} onChange={this.handlePicklistValueChange.bind(this)} value={this.state.picklistValue} placeholder="Select an option" />
           </div>
-
+        <br/>
+        <br/>
           <div>
             {this.state.locations}
           </div>
