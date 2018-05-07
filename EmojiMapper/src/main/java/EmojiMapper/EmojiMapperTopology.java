@@ -45,15 +45,15 @@ public class EmojiMapperTopology {
     	String url = "mongodb://172.31.37.96:27017/tweetsdb";
     	String dbName = "tweetsdb";
 
-    	String collectionName = "filteredTweets";
-    	MongoMapper filteredtweetMapper = new SimpleMongoMapper().withFields("tweet","date","trend","tweet_id","retweet_count");
+    	String collectionName = "tweets";
+    	MongoMapper filteredtweetMapper = new SimpleMongoMapper().withFields("tweet","date","query","tweet_id","retweet_count","location","hasEmoji", "listEmoji", "hasLocation" );
     	MongoInsertBolt filteredTweetInsertBolt = new MongoInsertBolt(url, collectionName, filteredtweetMapper);
-    	filteredTweetInsertBolt.withBatchSize(10000);
+    	filteredTweetInsertBolt.withBatchSize(100);
     	
     	String collectionName1 = "emojiCount";
     	MongoMapper aggregateMapper = new SimpleMongoMapper().withFields("emoji","date","trend","count");
-    	MongoInsertBolt aggregateInsertBolt = new MongoInsertBolt(url, collectionName, aggregateMapper);
-    	aggregateInsertBolt.withBatchSize(100);
+    	MongoInsertBolt aggregateInsertBolt = new MongoInsertBolt(url, collectionName1, aggregateMapper);
+    	aggregateInsertBolt.withBatchSize(10);
 
     	
         	TopologyBuilder b = new TopologyBuilder();
@@ -62,7 +62,7 @@ public class EmojiMapperTopology {
         	kafkaConfig.startOffsetTime = kafka.api.OffsetRequest
                     .EarliestTime();
         	
-        	b.setSpout("KafkaSpout", new KafkaSpout(kafkaConfig),1);
+        	b.setSpout("KafkaSpout", new KafkaSpout(kafkaConfig),5);
         	b.setBolt("FilteredTweets", new FilterTweetsBolt(),4).shuffleGrouping("KafkaSpout");
         	b.setBolt("MongoInsertFilteredTweets", filteredTweetInsertBolt).shuffleGrouping("FilteredTweets");
             b.setBolt("SplitEmojiBolt", new EmojiSplitterBolt(),4).shuffleGrouping("FilteredTweets");

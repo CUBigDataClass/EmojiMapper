@@ -2,249 +2,58 @@ doctype html
 html(lang='en')
   head
     meta(charset='utf-8')
-    meta(http-equiv='X-UA-Compatible', content='IE=edge')
-    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
     meta(name='description', content='')
     meta(name='author', content='')
-    title EmojiMapper
-    // Bootstrap Core CSS
-    link(href='vendor/bootstrap/css/bootstrap.min.css', rel='stylesheet', type='text/css')
-    // MetisMenu CSS
-    link(href='vendor/metisMenu/metisMenu.min.css', rel='stylesheet', type='text/css')
-    // Custom CSS
-    link(href='css/style.css', rel='stylesheet', , type='text/css')
-    
-    link(href='dist/css/sb-admin-2.css', rel='stylesheet',, type='text/css')
-    // Custom Fonts
-    link(href='vendor/font-awesome/css/font-awesome.min.css', rel='stylesheet', type='text/css')
-  body
-    .wrapper
-      aside.sidebar
-        p Trends
-        nav
-          ul
-            li Chapter 1
-            li.active Chapter 2
-            li Chapter 3
-            li Chapter 4
-            li Chapter 5
-            li Chapter 1
-            
+    title Emoji Mapper
+    link(href='css/bootstrap.min.css', rel='stylesheet')
+    link(href='css/scrolling-nav.css', rel='stylesheet')
+    link(href='css/timeline.css', rel='stylesheet')
+  body#page-top
+    nav#mainNav.navbar.navbar-expand-lg.navbar-dark.bg-dark.fixed-top
+      .container
+        a.navbar-brand.js-scroll-trigger(href='#page-top') Emoji Mapper
+        button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarResponsive', aria-controls='navbarResponsive', aria-expanded='false', aria-label='Toggle navigation')
+          span.navbar-toggler-icon
+        #navbarResponsive.collapse.navbar-collapse
+          ul.navbar-nav.ml-auto
+            li.nav-item
+              a.nav-link.js-scroll-trigger(href='#query') Query
+    header.bg-primary.text-white
+      .container.text-center
+        h1 Emoji Mapper
+        p.lead Emoji speak a hundred words 😜
+    section#query
+      .container.text-center
+        .h2 Search for Tweets
+      br
+      br
+      .container
+        .row.text-center
+          .col-lg-4.mx.auto
+          .col-lg-4.mx-auto
+            form(action="/results", method="GET")
+              .form-group
+                label(for='query') Query
+                input#query.form-control(name="search",type='text')
+              .form-group
+                label(for='date') Date
+                input#date.form-control(name="date",type='text')
+              button.btn.btn-primary(type='submit') Submit
 
-      #page-wrapper
+          .col-lg-4.mx.auto
         
-        .row
-          .col-lg-12
-            h1.page-header Dashboard
 
-        .row
-          .col-lg-3.col-md-6
-            .panel.panel-primary
-              .panel-heading
-                .row
-                  .col-xs-3.text-right
-                  .col-xs-9.text-right
-                    .huge 3500000
-                    div Tweets processed
-          .col-lg-3.col-md-6
-            .panel.panel-green
-              .panel-heading
-                .row
-                  .col-xs-9.text-right
-                    .huge 100000
-                    div Tweets with Emojis
-          .col-lg-3.col-md-6
-            .panel.panel-yellow
-              .panel-heading
-                .row
-                  .col-xs-9.text-right
-                    .huge Total emojis
-                    div 3123113123
-          .col-lg-3.col-md-6
-            .panel.panel-red
-              .panel-heading
-                .row
-                  .col-xs-9.text-right
-                    .huge 1200
-                    div Trends processed
-
-        .row
-          .col-lg-8
-            .panel.panel-default
-              .panel-heading
-                i.fa.fa-fw
-                |  Trending Locations
-              // /.panel-heading
-              .panel-body
-                .div#mapDiv
-                  svg#mapMain
-
-          .col-lg-4
-            .panel.panel-default
-              .panel-heading
-                i.fa.fa-bell.fa-fw
-                |  Notifications Panel
-              // /.panel-heading
-              .panel-body
-                .list-group
-                  a.list-group-item(href='#')
-                    i.fa.fa-comment.fa-fw
-                    |  New Comment
-                    span.pull-right.text-muted.small
-                      em 4 minutes ago
-                  a.list-group-item(href='#')
-                    i.fa.fa-twitter.fa-fw
-                    |  3 New Followers
-                    span.pull-right.text-muted.small
-                      em 12 minutes ago
-                  a.list-group-item(href='#')
-                    i.fa.fa-envelope.fa-fw
-                    |  Message Sent
-                    span.pull-right.text-muted.small
-                      em 27 minutes ago
-                  a.list-group-item(href='#')
-                    i.fa.fa-tasks.fa-fw
-                    |  New Task
-                    span.pull-right.text-muted.small
-                      em 43 minutes ago
-                  a.list-group-item(href='#')
-                    i.fa.fa-upload.fa-fw
-                    |  Server Rebooted
-                    span.pull-right.text-muted.small
-                      em 11:32 AM
-                  a.list-group-item(href='#')
-                    i.fa.fa-bolt.fa-fw
-                    |  Server Crashed!
-                    span.pull-right.text-muted.small
-                      em 11:13 AM
-                  a.list-group-item(href='#')
-                    i.fa.fa-warning.fa-fw
-                    |  Server Not Responding
-                    span.pull-right.text-muted.small
-                      em 10:57 AM
-                  a.list-group-item(href='#')
-                    i.fa.fa-shopping-cart.fa-fw
-                    |  New Order Placed
-                    span.pull-right.text-muted.small
-                      em 9:49 AM
-                  a.list-group-item(href='#')
-                    i.fa.fa-money.fa-fw
-                    |  Payment Received
-                    span.pull-right.text-muted.small
-                      em Yesterday
-                // /.list-group
-                a.btn.btn-default.btn-block(href='#') View All Alerts
-              // /.panel-body
-            // /.panel
-            .chat-panel.panel.panel-default
-              .panel-heading
-                i.fa.fa-comments.fa-fw
-                |  Chat
-                .btn-group.pull-right
-                  button.btn.btn-default.btn-xs.dropdown-toggle(type='button', data-toggle='dropdown')
-                    i.fa.fa-chevron-down
-                  ul.dropdown-menu.slidedown
-                    li
-                      a(href='#')
-                        i.fa.fa-refresh.fa-fw
-                        |  Refresh
-                    li
-                      a(href='#')
-                        i.fa.fa-check-circle.fa-fw
-                        |  Available
-                    li
-                      a(href='#')
-                        i.fa.fa-times.fa-fw
-                        |  Busy
-                    li
-                      a(href='#')
-                        i.fa.fa-clock-o.fa-fw
-                        |  Away
-                    li.divider
-                    li
-                      a(href='#')
-                        i.fa.fa-sign-out.fa-fw
-                        |  Sign Out
-              // /.panel-heading
-              .panel-body
-                ul.chat
-                  li.left.clearfix
-                    span.chat-img.pull-left
-                      img.img-circle(src='http://placehold.it/50/55C1E7/fff', alt='User Avatar')
-                    .chat-body.clearfix
-                      .header
-                        strong.primary-font Jack Sparrow
-                        small.pull-right.text-muted
-                          i.fa.fa-clock-o.fa-fw
-                          |  12 mins ago
-                      p
-                        | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
-                  li.right.clearfix
-                    span.chat-img.pull-right
-                      img.img-circle(src='http://placehold.it/50/FA6F57/fff', alt='User Avatar')
-                    .chat-body.clearfix
-                      .header
-                        small.text-muted
-                          i.fa.fa-clock-o.fa-fw
-                          |  13 mins ago
-                        strong.pull-right.primary-font Bhaumik Patel
-                      p
-                        | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
-                  li.left.clearfix
-                    span.chat-img.pull-left
-                      img.img-circle(src='http://placehold.it/50/55C1E7/fff', alt='User Avatar')
-                    .chat-body.clearfix
-                      .header
-                        strong.primary-font Jack Sparrow
-                        small.pull-right.text-muted
-                          i.fa.fa-clock-o.fa-fw
-                          |  14 mins ago
-                      p
-                        | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
-                  li.right.clearfix
-                    span.chat-img.pull-right
-                      img.img-circle(src='http://placehold.it/50/FA6F57/fff', alt='User Avatar')
-                    .chat-body.clearfix
-                      .header
-                        small.text-muted
-                          i.fa.fa-clock-o.fa-fw
-                          |  15 mins ago
-                        strong.pull-right.primary-font Bhaumik Patel
-                      p
-                        | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
-              // /.panel-body
-              .panel-footer
-                .input-group
-                  input#btn-input.form-control.input-sm(type='text', placeholder='Type your message here...')
-                  span.input-group-btn
-                    button#btn-chat.btn.btn-warning.btn-sm
-                      | Send
-              // /.panel-footer
-            // /.panel .chat-panel
-          // /.col-lg-4
-        // /.row
-      // /#page-wrapper
-    // /#wrapper
-    // jQuery
+    // Footer
+    footer.py-5.bg-dark
+      .container
+        p.m-0.text-center.text-white 
+      // /.container
+    // Bootstrap core JavaScript
     script(src='vendor/jquery/jquery.min.js')
-    // Bootstrap Core JavaScript
-    script(src='vendor/bootstrap/js/bootstrap.min.js')
-    // Metis Menu Plugin JavaScript
-    script(src='vendor/metisMenu/metisMenu.min.js')
-    // Morris Charts JavaScript
-    script(src='vendor/raphael/raphael.min.js')
-    script(src='vendor/morrisjs/morris.min.js')
-    script(src='data/morris-data.js')
-    // Custom Theme JavaScript
-    script(src='dist/js/sb-admin-2.js')
-    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
-    script(src='https://d3js.org/d3.v3.min.js')
-    script(src='https://d3js.org/topojson.v1.min.js')
-    script(src='https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js')
-    script(src='http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js')
-    script(src='//code.jquery.com/jquery-1.11.0.min.js')
-    script(src='//code.jquery.com/jquery-migrate-1.2.1.min.js')
-    script(src='wordcloud2.js')
-    script(src='js/custom.js')
-
-    script(src="js/d3map.js")
+    script(src='vendor/bootstrap/js/bootstrap.bundle.min.js')
+    // Plugin JavaScript
+    script(src='vendor/jquery-easing/jquery.easing.min.js')
+    // Custom JavaScript for this theme
+    script(src='js/scrolling-nav.js')
+    script(src="js/getdensity.js")

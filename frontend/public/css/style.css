@@ -119,14 +119,30 @@ h2 {
   margin-bottom: 5px;
 }
 
-div#wordcloudDiv {
-  position: absolute;
-  top: 50px;
-  left: 50px;
 
+
+      #map {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+      }
+
+      .NEmarker {
+  background-image: url('../markerred.png');
+  background-size: cover;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  cursor: pointer;
 }
 
-canvas#canvas_cloud{
-  width: 475px;
-  height: 500px;
+
+      .marker {
+  background-image: url('../marker.png');
+  background-size: cover;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  cursor: pointer;
 }
